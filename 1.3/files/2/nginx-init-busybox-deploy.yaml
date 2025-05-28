@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-init-busybox-deploy
+  labels:
+    app: nginx-init-busybox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-init-busybox
+  template:
+    metadata:
+      labels:
+        app: nginx-init-busybox
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.28.0
+        ports:
+        - name: http-nginx
+          containerPort: 80
+      initContainers:
+      - name: init-busybox
+        image: busybox:1.37.0
+        command: ['sh', '-c', 'until nslookup nginx-svc.default.svc.cluster.local; do echo "$(date "+%Y-%m-%d %H:%M:%S") waiting: nginx-svc"; sleep 10; done']
