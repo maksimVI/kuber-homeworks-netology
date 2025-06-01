@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-multitool-svc
+spec:
+  selector:
+    app: nginx-multitool
+  ports:
+  - name: http-nginx
+    port: 9001
+    protocol: TCP
+    targetPort: http-nginx
+  - name: http-multitool
+    port: 9002
+    protocol: TCP
+    targetPort: http-multitool
+    
