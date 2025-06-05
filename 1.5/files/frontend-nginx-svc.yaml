@@ -7,7 +7,7 @@ spec:
     app: frontend-nginx
   ports:
   - name: http-frontend
-    port: 9001
+    port: 80
     protocol: TCP
     targetPort: http-frontend
   type: ClusterIP

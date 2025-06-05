@@ -19,7 +19,7 @@ spec:
         image: wbitt/network-multitool:minimal
         env:
         - name: HTTP_PORT
-          value: "8080"
+          value: "80"
         ports:
         - name: http-backend
-          containerPort: 8080
+          containerPort: 80
