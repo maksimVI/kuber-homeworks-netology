@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: multitool-syslog-daemonset
+spec:
+  selector:
+    matchLabels:
+      app: multitool-syslog
+  template:
+    metadata:
+      labels:
+        app: multitool-syslog
+    spec:
+      containers:
+      - name: multitool-syslog
+        image: wbitt/network-multitool:minimal
+        volumeMounts:
+        - name: logs-vol
+          mountPath: /node/syslog
+          readOnly: true
+      volumes:
+      - name: logs-vol
+        hostPath:
+          path: /var/log/syslog
+          type: File
