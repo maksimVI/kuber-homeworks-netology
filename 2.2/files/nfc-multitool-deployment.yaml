@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfc-multitool-deployment
+  labels:
+    app: nfc-multitool
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfc-multitool
+  template:
+    metadata:
+      labels:
+        app: nfc-multitool
+    spec:
+      containers:
+      - name: multitool
+        image: wbitt/network-multitool:minimal
+        volumeMounts:
+        - name: nfc-data-vol
+          mountPath: /data
+      volumes:
+      - name: nfc-data-vol
+        persistentVolumeClaim:
+          claimName: nfc-multitool-pvc
