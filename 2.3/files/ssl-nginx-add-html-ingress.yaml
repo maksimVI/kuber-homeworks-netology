@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ssl-nginx-add-html-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: ssl-nginx-add-html.ru
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ssl-nginx-add-html-svc
+            port: 
+              number: 443
+  tls:
+    - hosts:
+      - ssl-nginx-add-html.ru
+      secretName: ssl-nginx-add-html-secret-tls

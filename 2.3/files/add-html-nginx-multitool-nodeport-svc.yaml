@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: add-html-nginx-multitool-nodeport-svc
+spec:
+  selector:
+    app: nginx-multitool
+  type: NodePort
+  ports:
+  - name: http-nginx
+    port: 80
+    protocol: TCP
+    nodePort: 30080
+    

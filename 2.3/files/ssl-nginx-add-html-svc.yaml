@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ssl-nginx-add-html-svc
+spec:
+  selector:
+    app: ssl-nginx
+  ports:
+  - name: https-nginx
+    port: 443
+    protocol: TCP
+    targetPort: http-nginx
+  type: ClusterIP
